@@ -5,25 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jaspurrr</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Fira+Code:wght@400;600&family=Lexend:wght@300;400;600;700;800&family=Poppins:wght@300;400;600;700;800&family=Rajdhani:wght@400;500;600;700&family=Syne:wght@400;600;700;800&family=Unbounded:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fira+Code:wght@400;600&family=Unbounded:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0b0b14;--bg2:#12121e;--accent:#7c3aed;--accent-glow:#7c3aed55;--text:#e8e8f0;--text-muted:#6e6e88;--card-bg:#ffffff06;--card-border:#ffffff0e;--card-hover:#ffffff12;--radius:14px;--font-display:'Unbounded',sans-serif;--font-body:'DM Sans',sans-serif;--font-mono:'Fira Code',monospace}
 html{font-size:16px}
-body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .5s,color .3s}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 
-/* ═══ BG ═══ */
 #bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 .bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--card-border) 1px,transparent 1px),linear-gradient(90deg,var(--card-border) 1px,transparent 1px);background-size:50px 50px;opacity:.35}
 .bg-glow{position:fixed;top:-250px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);filter:blur(90px);opacity:.35;pointer-events:none;z-index:0}
 .bg-noise{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.025;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-/* ═══ PROFILE ═══ */
 .profile-page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:70px 20px 80px;min-height:100vh}
 
-.avatar-wrap{position:relative;margin-bottom:22px;cursor:pointer}
-.avatar-wrap:hover .avatar-hint{opacity:1}
-.avatar-hint{position:absolute;inset:0;border-radius:50%;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;font-size:.68rem;color:#fff;font-weight:600;opacity:0;transition:opacity .25s;pointer-events:none;letter-spacing:.5px;text-transform:uppercase;z-index:2}
+.avatar-wrap{position:relative;margin-bottom:22px}
 .avatar{width:130px;height:130px;border-radius:50%;border:3px solid var(--accent);object-fit:cover;box-shadow:0 0 35px var(--accent-glow),0 0 70px var(--accent-glow);background:var(--bg2)}
 .avatar-placeholder{width:130px;height:130px;border-radius:50%;border:3px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:52px;font-weight:900;color:var(--accent);background:var(--bg2);box-shadow:0 0 35px var(--accent-glow);font-family:var(--font-display)}
 .status-dot{position:absolute;bottom:10px;right:10px;width:18px;height:18px;border-radius:50%;background:#22c55e;border:3.5px solid var(--bg);box-shadow:0 0 10px #22c55e88;z-index:3}
@@ -50,66 +46,6 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-hei
 .link-arrow{margin-left:auto;color:var(--text-muted);font-size:14px;transition:transform .25s,color .25s}
 .link-card:hover .link-arrow{transform:translateX(5px);color:var(--accent)}
 
-/* ═══ SETTINGS ═══ */
-.settings-toggle{position:fixed;bottom:24px;right:24px;z-index:1000;width:52px;height:52px;border-radius:14px;background:var(--accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;box-shadow:0 4px 24px var(--accent-glow);transition:all .3s}
-.settings-toggle:hover{transform:scale(1.1) rotate(45deg)}
-.settings-overlay{position:fixed;inset:0;z-index:999;background:#000a;backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .3s}
-.settings-overlay.open{opacity:1;pointer-events:all}
-.settings-panel{position:fixed;right:-520px;top:0;bottom:0;z-index:1001;width:460px;max-width:100vw;background:var(--bg2);border-left:1px solid var(--card-border);overflow-y:auto;transition:right .4s cubic-bezier(.4,0,.2,1);padding:28px 24px 120px}
-.settings-panel.open{right:0}
-.settings-panel h2{font-family:var(--font-display);font-size:1.2rem;font-weight:700;margin-bottom:5px;color:#fff}
-.settings-panel .sub{color:var(--text-muted);font-size:.8rem;margin-bottom:22px}
-.ss{margin-bottom:24px}
-.ss h3{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:var(--accent);margin-bottom:11px}
-.sf{margin-bottom:11px}
-.sf label{display:block;font-size:.76rem;color:var(--text-muted);margin-bottom:3px;font-weight:600}
-.sf input[type="text"],.sf input[type="url"],.sf textarea,.sf select{width:100%;padding:9px 13px;background:var(--bg);border:1px solid var(--card-border);border-radius:10px;color:#fff;font-family:var(--font-body);font-size:.86rem;outline:none;transition:border-color .3s}
-.sf input:focus,.sf textarea:focus,.sf select:focus{border-color:var(--accent)}
-.sf textarea{resize:vertical;min-height:50px}
-.sf select{cursor:pointer}
-.sf input[type="color"]{width:44px;height:32px;border:none;cursor:pointer;background:none;border-radius:6px}
-.color-row{display:flex;gap:12px;flex-wrap:wrap}
-.color-item{display:flex;flex-direction:column;align-items:center;gap:2px}
-.color-item span{font-size:.66rem;color:var(--text-muted)}
-
-.dz{width:100%;padding:24px 14px;border:2px dashed var(--card-border);border-radius:14px;text-align:center;color:var(--text-muted);font-size:.8rem;cursor:pointer;transition:all .25s;position:relative;background:var(--bg)}
-.dz:hover,.dz.drag-over{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent),transparent 92%)}
-.dz input{position:absolute;inset:0;opacity:0;cursor:pointer}
-.dz .dz-p{max-width:70px;max-height:70px;border-radius:10px;margin:6px auto 0;display:block}
-.dz-cur .dz-p{max-width:42px;max-height:42px;image-rendering:pixelated}
-
-.lei{background:var(--bg);border:1px solid var(--card-border);border-radius:12px;padding:12px;margin-bottom:9px;position:relative}
-.lei .lr{display:flex;gap:7px;margin-bottom:7px}
-.lei input,.lei select{flex:1;padding:7px 11px;background:var(--bg2);border:1px solid var(--card-border);border-radius:8px;color:#fff;font-family:var(--font-body);font-size:.82rem;outline:none}
-.lei input:focus,.lei select:focus{border-color:var(--accent)}
-.led{position:absolute;top:7px;right:7px;background:none;border:none;color:#ef4444;cursor:pointer;font-size:14px;opacity:.5;transition:opacity .2s}
-.led:hover{opacity:1}
-
-.sei{display:flex;gap:7px;margin-bottom:7px;align-items:center}
-.sei select,.sei input{padding:7px 11px;background:var(--bg);border:1px solid var(--card-border);border-radius:8px;color:#fff;font-family:var(--font-body);font-size:.82rem;outline:none}
-.sei input{flex:1}
-.sei select:focus,.sei input:focus{border-color:var(--accent)}
-.sed{background:none;border:none;color:#ef4444;cursor:pointer;font-size:14px;opacity:.5;padding:3px}
-.sed:hover{opacity:1}
-
-.ba{width:100%;padding:9px;background:transparent;border:2px dashed var(--card-border);border-radius:12px;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);font-size:.82rem;transition:all .2s}
-.ba:hover{border-color:var(--accent);color:var(--accent)}
-.bs{position:sticky;bottom:0;width:calc(100% + 48px);margin-left:-24px;padding:16px;background:var(--accent);border:none;color:#fff;font-family:var(--font-display);font-size:.92rem;font-weight:700;cursor:pointer;transition:filter .2s;letter-spacing:.5px}
-.bs:hover{filter:brightness(1.15)}
-.be{width:100%;padding:10px;margin-bottom:9px;background:transparent;border:1px solid var(--card-border);border-radius:12px;color:var(--text);font-family:var(--font-body);font-size:.82rem;cursor:pointer;transition:all .2s}
-.be:hover{border-color:var(--accent);color:var(--accent)}
-.pr{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:5px}
-.pb{padding:4px 11px;border-radius:20px;border:1px solid var(--card-border);background:transparent;color:var(--text-muted);font-size:.72rem;cursor:pointer;font-family:var(--font-body);transition:all .2s}
-.pb:hover{border-color:var(--accent);color:var(--accent)}
-.tr{display:flex;align-items:center;justify-content:space-between;padding:5px 0}
-.tr>label:first-child{font-size:.8rem;color:var(--text-muted);font-weight:500}
-.ts{position:relative;width:40px;height:22px;cursor:pointer}
-.ts input{display:none}
-.tsl{position:absolute;inset:0;background:var(--card-border);border-radius:11px;transition:background .25s}
-.tsl::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .25s}
-.ts input:checked+.tsl{background:var(--accent)}
-.ts input:checked+.tsl::after{transform:translateX(18px)}
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 .profile-page>*{animation:fadeUp .6s ease backwards}
 .profile-page>*:nth-child(1){animation-delay:.05s}
@@ -117,12 +53,8 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-hei
 .profile-page>*:nth-child(3){animation-delay:.18s}
 .profile-page>*:nth-child(4){animation-delay:.26s}
 .profile-page>*:nth-child(5){animation-delay:.33s}
-.profile-page>*:nth-child(6){animation-delay:.4s}
 
-@media(max-width:520px){.settings-panel{width:100vw}.username{font-size:2rem}.avatar,.avatar-placeholder{width:105px;height:105px}}
-.settings-panel::-webkit-scrollbar{width:4px}
-.settings-panel::-webkit-scrollbar-track{background:transparent}
-.settings-panel::-webkit-scrollbar-thumb{background:#ffffff18;border-radius:3px}
+@media(max-width:520px){.username{font-size:2rem}.avatar,.avatar-placeholder{width:105px;height:105px}}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:#ffffff15;border-radius:3px}
@@ -130,247 +62,76 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-hei
 </head>
 <body>
 <canvas id="bgCanvas"></canvas>
-<div class="bg-grid" id="bgGrid"></div>
-<div class="bg-glow" id="bgGlow"></div>
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
 <div class="bg-noise"></div>
 
-<div class="profile-page" id="pp">
-  <div class="avatar-wrap" id="aw">
-    <div class="avatar-placeholder" id="ae">J</div>
+<div class="profile-page">
+  <div class="avatar-wrap">
+    <div class="avatar-placeholder">J</div>
     <div class="status-dot"></div>
-    <div class="avatar-hint">UPLOAD</div>
-    <input type="file" id="afm" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer">
   </div>
-  <div class="username" id="ue">Jaspurrr</div>
-  <div class="bio" id="be"></div>
-  <div class="socials" id="se"></div>
-  <div class="links-container" id="le"></div>
-</div>
+  <div class="username">Jaspurrr</div>
+  <div class="bio" id="bio"></div>
 
-<button class="settings-toggle" id="sb" title="Settings">&#9881;</button>
-<div class="settings-overlay" id="so"></div>
-<div class="settings-panel" id="sp">
-  <h2>Einstellungen</h2>
-  <p class="sub">Dein Profil, dein Style.</p>
-
-  <div class="ss"><h3>PRESETS</h3><div class="pr" id="prow"></div></div>
-
-  <div class="ss"><h3>PROFIL</h3>
-    <div class="sf"><label>Name</label><input type="text" id="iName"></div>
-    <div class="sf"><label>Bio</label><textarea id="iBio"></textarea></div>
-    <div class="sf"><label>Profilbild (Drag &amp; Drop)</label><div class="dz" id="adz">&#128247; Bild hier reinziehen oder klicken<input type="file" id="af" accept="image/*"></div></div>
+  <div class="socials">
+    <a class="social-icon" href="https://www.twitch.tv/jaspur0719" target="_blank" rel="noopener" title="Twitch">
+      <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+    </a>
+    <a class="social-icon" href="https://x.com/Jaspur0719" target="_blank" rel="noopener" title="X / Twitter">
+      <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a class="social-icon" href="https://discord.gg/BM9krSYWda" target="_blank" rel="noopener" title="Discord">
+      <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+    </a>
   </div>
 
-  <div class="ss"><h3>FARBEN</h3>
-    <div class="color-row">
-      <div class="color-item"><input type="color" id="cBg"><span>BG</span></div>
-      <div class="color-item"><input type="color" id="cBg2"><span>BG2</span></div>
-      <div class="color-item"><input type="color" id="cAc"><span>Akzent</span></div>
-      <div class="color-item"><input type="color" id="cTx"><span>Text</span></div>
-      <div class="color-item"><input type="color" id="cMu"><span>Muted</span></div>
-    </div>
+  <div class="links-container" id="links">
+    <a class="link-card" href="https://www.tiktok.com/@zx8.jt7?lang=de-DE" target="_blank" rel="noopener">
+      <div class="link-icon"><svg viewBox="0 0 24 24"><path fill="#fff" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></div>
+      <span class="link-title">TikTok</span>
+      <span class="link-arrow">&rarr;</span>
+    </a>
+    <a class="link-card" href="https://discord.gg/BM9krSYWda" target="_blank" rel="noopener">
+      <div class="link-icon"><svg viewBox="0 0 24 24"><path fill="#fff" d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg></div>
+      <span class="link-title">Discord Server</span>
+      <span class="link-arrow">&rarr;</span>
+    </a>
+    <a class="link-card" href="https://jasprrr0719.github.io/Computer-Assistent/" target="_blank" rel="noopener">
+      <div class="link-icon"><svg viewBox="0 0 24 24"><path fill="#fff" d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1.17A3 3 0 0 1 18 21H6a3 3 0 0 1-2.83-2H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2zM9 14a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg></div>
+      <span class="link-title">Meine Ki</span>
+      <span class="link-arrow">&rarr;</span>
+    </a>
   </div>
-
-  <div class="ss"><h3>SCHRIFTART</h3>
-    <div class="sf"><label>Display Font</label>
-      <select id="iFont">
-        <option value="'Unbounded', sans-serif">Unbounded</option>
-        <option value="'Bebas Neue', sans-serif">Bebas Neue</option>
-        <option value="'Syne', sans-serif">Syne</option>
-        <option value="'Rajdhani', sans-serif">Rajdhani</option>
-        <option value="'Lexend', sans-serif">Lexend</option>
-        <option value="'Poppins', sans-serif">Poppins</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="ss"><h3>EFFEKTE</h3>
-    <div class="tr"><label>Grid</label><label class="ts"><input type="checkbox" id="tG"><span class="tsl"></span></label></div>
-    <div class="tr"><label>Glow</label><label class="ts"><input type="checkbox" id="tW"><span class="tsl"></span></label></div>
-    <div class="tr"><label>Partikel</label><label class="ts"><input type="checkbox" id="tP"><span class="tsl"></span></label></div>
-    <div class="tr"><label>Typing-Animation</label><label class="ts"><input type="checkbox" id="tT"><span class="tsl"></span></label></div>
-  </div>
-
-  <div class="ss"><h3>CUSTOM CURSOR</h3>
-    <div class="dz dz-cur" id="cdz">&#128433; Cursor-Bild (.png) reinziehen<input type="file" id="cf" accept="image/*,.cur"></div>
-    <div style="margin-top:7px"><button class="ba" id="rc" style="font-size:.76rem">Cursor zur&#252;cksetzen</button></div>
-  </div>
-
-  <div class="ss"><h3>LINKS</h3><div id="lle"></div><button class="ba" id="al">+ Link hinzuf&#252;gen</button></div>
-  <div class="ss"><h3>SOCIALS</h3><div id="sle"></div><button class="ba" id="as">+ Social hinzuf&#252;gen</button></div>
-
-  <div class="ss"><h3>EXPORT / IMPORT</h3>
-    <button class="be" id="ej">Config als JSON exportieren</button>
-    <button class="be" id="ij">Config importieren</button>
-    <input type="file" id="imf" accept=".json" style="display:none">
-    <button class="be" id="eh">Als standalone HTML exportieren</button>
-  </div>
-
-  <button class="bs" id="sv">SPEICHERN</button>
 </div>
 
 <script>
-const IC={
-  twitch:'<svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>',
-  twitter:'<svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>',
-  discord:'<svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>',
-  youtube:'<svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><polygon fill="#000" points="9.545,15.568 15.818,12 9.545,8.432"/></svg>',
-  github:'<svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>',
-  tiktok:'<svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>',
-  instagram:'<svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>',
-  spotify:'<svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>',
-  kick:'<svg viewBox="0 0 24 24"><path d="M1.2 0h5.4v7.2L10.2 3.6h6L11.4 9l5.4 5.4H10.8l-4.2-4.2v9.6L1.2 24z"/><path d="M16.2 0h6v7.2h-6z"/><path d="M16.2 16.8h6V24h-6z"/></svg>',
-  steam:'<svg viewBox="0 0 24 24"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 12.001-5.373 12.001-12S18.606 0 11.979 0z"/></svg>',
-  website:'<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>',
-  link:'<svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>',
-};
-
-const PRESETS={
-  'Violet Night':{bg:'#0b0b14',bg2:'#12121e',accent:'#7c3aed',text:'#e8e8f0',muted:'#6e6e88'},
-  'Cyber Red':{bg:'#0c0608',bg2:'#160a0e',accent:'#ef4444',text:'#f0e0e0',muted:'#a08080'},
-  'Ocean':{bg:'#040e14',bg2:'#081820',accent:'#06b6d4',text:'#d0e8f0',muted:'#5090a0'},
-  'Neon Green':{bg:'#030a03',bg2:'#061206',accent:'#22c55e',text:'#d0f0d0',muted:'#509050'},
-  'Sunset':{bg:'#100806',bg2:'#1a100a',accent:'#f97316',text:'#f0e0d0',muted:'#a08060'},
-  'Hot Pink':{bg:'#0e060c',bg2:'#180a14',accent:'#ec4899',text:'#f0d0e8',muted:'#a06090'},
-  'Gold Lux':{bg:'#0c0a04',bg2:'#161208',accent:'#eab308',text:'#f0ead0',muted:'#a09060'},
-  'Arctic':{bg:'#f0f3f8',bg2:'#e4e8f0',accent:'#3b82f6',text:'#1e293b',muted:'#64748b'},
-  'Midnight':{bg:'#020208',bg2:'#06060e',accent:'#818cf8',text:'#c8c8e0',muted:'#5050a0'},
-};
-
-// ═══ DEFAULT: Jaspurrr ═══
-let C={name:'Jaspurrr',bio:'I am Chatter / Developer',avatarData:'',cursorData:'',
-  colors:{bg:'#0b0b14',bg2:'#12121e',accent:'#7c3aed',text:'#e8e8f0',muted:'#6e6e88'},
-  font:"'Unbounded', sans-serif",fx:{grid:true,glow:true,particles:true,typing:true},
-  links:[
-    {title:'Portfolio',url:'https://example.com',icon:'website'},
-    {title:'Discord Server',url:'https://discord.gg',icon:'discord'},
-    {title:'GitHub',url:'https://github.com',icon:'github'},
-  ],
-  socials:[
-    {platform:'twitch',url:'https://twitch.tv'},
-    {platform:'twitter',url:'https://x.com'},
-    {platform:'discord',url:'https://discord.gg'},
-  ]};
-
-try{const s=localStorage.getItem('lh3');if(s)C=JSON.parse(s)}catch(e){}
-
 // ═══ PARTICLES ═══
 const cv=document.getElementById('bgCanvas'),cx=cv.getContext('2d');
-let pts=[],pon=true;
+let pts=[];
 function rz(){cv.width=innerWidth;cv.height=innerHeight}
 addEventListener('resize',rz);rz();
-function mp(){pts=[];for(let i=0;i<55;i++)pts.push({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1.6+.4,dx:(Math.random()-.5)*.28,dy:(Math.random()-.5)*.28,o:Math.random()*.45+.1})}
-mp();
-function hr(h){return[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]}
-function dp(){cx.clearRect(0,0,cv.width,cv.height);if(!pon){requestAnimationFrame(dp);return}
-const[r,g,b]=hr(C.colors.accent);
+for(let i=0;i<55;i++)pts.push({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1.6+.4,dx:(Math.random()-.5)*.28,dy:(Math.random()-.5)*.28,o:Math.random()*.45+.1});
+
+function dp(){cx.clearRect(0,0,cv.width,cv.height);
 pts.forEach(p=>{p.x+=p.dx;p.y+=p.dy;if(p.x<0)p.x=cv.width;if(p.x>cv.width)p.x=0;if(p.y<0)p.y=cv.height;if(p.y>cv.height)p.y=0;
-cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle=`rgba(${r},${g},${b},${p.o})`;cx.fill()});
+cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle=`rgba(124,58,237,${p.o})`;cx.fill()});
 for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
-if(d<110){cx.beginPath();cx.moveTo(pts[i].x,pts[i].y);cx.lineTo(pts[j].x,pts[j].y);cx.strokeStyle=`rgba(${r},${g},${b},${.07*(1-d/110)})`;cx.lineWidth=.5;cx.stroke()}}
+if(d<110){cx.beginPath();cx.moveTo(pts[i].x,pts[i].y);cx.lineTo(pts[j].x,pts[j].y);cx.strokeStyle=`rgba(124,58,237,${.07*(1-d/110)})`;cx.lineWidth=.5;cx.stroke()}}
 requestAnimationFrame(dp)}
 dp();
 
 // ═══ TYPING ═══
-let ti=null;
-function tt(el,text){if(ti)clearInterval(ti);el.innerHTML='';let i=0;const cur=document.createElement('span');cur.className='cursor-blink';
-ti=setInterval(()=>{if(i<text.length){el.innerHTML=text.slice(0,i+1);el.appendChild(cur);i++}else{clearInterval(ti);ti=null}},50)}
+const bio=document.getElementById('bio');
+const txt='I am Chatter / Developer';
+let i=0;const cur=document.createElement('span');cur.className='cursor-blink';
+const ti=setInterval(()=>{if(i<txt.length){bio.innerHTML=txt.slice(0,i+1);bio.appendChild(cur);i++}else clearInterval(ti)},50);
 
 // ═══ RIPPLE ═══
-function ar(e,c){const rect=c.getBoundingClientRect(),r=document.createElement('span');r.className='ripple';const s=Math.max(rect.width,rect.height)*2;
-r.style.width=r.style.height=s+'px';r.style.left=(e.clientX-rect.left-s/2)+'px';r.style.top=(e.clientY-rect.top-s/2)+'px';c.appendChild(r);setTimeout(()=>r.remove(),600)}
-
-// ═══ APPLY ═══
-function apply(){const s=document.documentElement.style;
-s.setProperty('--bg',C.colors.bg);s.setProperty('--bg2',C.colors.bg2);s.setProperty('--accent',C.colors.accent);s.setProperty('--accent-glow',C.colors.accent+'55');s.setProperty('--text',C.colors.text);s.setProperty('--text-muted',C.colors.muted);s.setProperty('--font-display',C.font);
-
-document.getElementById('ue').textContent=C.name;document.getElementById('ue').style.fontFamily=C.font;
-document.title=C.name;
-const bio=document.getElementById('be');if(C.fx.typing)tt(bio,C.bio);else bio.textContent=C.bio;
-
-const aw=document.getElementById('aw');
-if(C.avatarData)aw.innerHTML='<img class="avatar" src="'+C.avatarData+'"><div class="status-dot"></div><div class="avatar-hint">\u00C4NDERN</div>';
-else aw.innerHTML='<div class="avatar-placeholder">'+C.name.charAt(0).toUpperCase()+'</div><div class="status-dot"></div><div class="avatar-hint">UPLOAD</div>';
-const fi=document.createElement('input');fi.type='file';fi.accept='image/*';fi.style.cssText='position:absolute;inset:0;opacity:0;cursor:pointer';
-fi.addEventListener('change',e=>haf(e.target.files[0]));aw.appendChild(fi);
-
-if(C.cursorData)document.body.style.cursor='url('+C.cursorData+') 0 0, auto';else document.body.style.cursor='';
-
-document.getElementById('bgGrid').style.display=C.fx.grid?'':'none';
-document.getElementById('bgGlow').style.display=C.fx.glow?'':'none';
-pon=C.fx.particles;
-
-const sE=document.getElementById('se');sE.innerHTML='';
-C.socials.forEach(s=>{const a=document.createElement('a');a.className='social-icon';a.href=s.url;a.target='_blank';a.rel='noopener';a.innerHTML=IC[s.platform]||IC.link;sE.appendChild(a)});
-
-const lE=document.getElementById('le');lE.innerHTML='';
-C.links.forEach(l=>{const a=document.createElement('a');a.className='link-card';a.href=l.url;a.target='_blank';a.rel='noopener';
-a.innerHTML='<div class="link-icon">'+(IC[l.icon]||IC.link)+'</div><span class="link-title">'+l.title+'</span><span class="link-arrow">\u2192</span>';
-a.addEventListener('click',e=>ar(e,a));lE.appendChild(a)});
-
-localStorage.setItem('lh3',JSON.stringify(C))}
-
-// ═══ FILE ═══
-function f2b(f){return new Promise((r,j)=>{const rd=new FileReader();rd.onload=()=>r(rd.result);rd.onerror=j;rd.readAsDataURL(f)})}
-async function haf(f){if(!f)return;C.avatarData=await f2b(f);apply();const d=document.getElementById('adz');if(d){let p=d.querySelector('.dz-p');if(!p){p=document.createElement('img');p.className='dz-p';d.appendChild(p)}p.src=C.avatarData}}
-async function hcf(f){if(!f)return;C.cursorData=await f2b(f);apply();const d=document.getElementById('cdz');if(d){let p=d.querySelector('.dz-p');if(!p){p=document.createElement('img');p.className='dz-p';d.appendChild(p)}p.src=C.cursorData}}
-function sdz(el,h){el.addEventListener('dragover',e=>{e.preventDefault();el.classList.add('drag-over')});el.addEventListener('dragleave',()=>el.classList.remove('drag-over'));el.addEventListener('drop',e=>{e.preventDefault();el.classList.remove('drag-over');h(e.dataTransfer.files[0])});const i=el.querySelector('input[type="file"]');if(i)i.addEventListener('change',e=>h(e.target.files[0]))}
-
-// ═══ SETTINGS ═══
-const pn=document.getElementById('sp'),ov=document.getElementById('so');
-function os(){pn.classList.add('open');ov.classList.add('open');pop()}
-function cs(){pn.classList.remove('open');ov.classList.remove('open')}
-document.getElementById('sb').addEventListener('click',os);ov.addEventListener('click',cs);
-
-const pw=document.getElementById('prow');
-Object.entries(PRESETS).forEach(([n,c])=>{const b=document.createElement('button');b.className='pb';b.textContent=n;
-b.addEventListener('click',()=>{document.getElementById('cBg').value=c.bg;document.getElementById('cBg2').value=c.bg2;document.getElementById('cAc').value=c.accent;document.getElementById('cTx').value=c.text;document.getElementById('cMu').value=c.muted});pw.appendChild(b)});
-
-function pop(){
-document.getElementById('iName').value=C.name;document.getElementById('iBio').value=C.bio;
-document.getElementById('cBg').value=C.colors.bg;document.getElementById('cBg2').value=C.colors.bg2;document.getElementById('cAc').value=C.colors.accent;document.getElementById('cTx').value=C.colors.text;document.getElementById('cMu').value=C.colors.muted;
-document.getElementById('iFont').value=C.font;document.getElementById('tG').checked=C.fx.grid;document.getElementById('tW').checked=C.fx.glow;document.getElementById('tP').checked=C.fx.particles;document.getElementById('tT').checked=C.fx.typing;
-
-const aD=document.getElementById('adz');let aP=aD.querySelector('.dz-p');
-if(C.avatarData){if(!aP){aP=document.createElement('img');aP.className='dz-p';aD.appendChild(aP)}aP.src=C.avatarData}else if(aP)aP.remove();
-const cD=document.getElementById('cdz');let cP=cD.querySelector('.dz-p');
-if(C.cursorData){if(!cP){cP=document.createElement('img');cP.className='dz-p';cD.appendChild(cP)}cP.src=C.cursorData}else if(cP)cP.remove();
-
-sdz(document.getElementById('adz'),haf);sdz(document.getElementById('cdz'),hcf);
-
-const ll=document.getElementById('lle');ll.innerHTML='';C.links.forEach((l,i)=>ll.appendChild(mle(l,i)));
-const sl=document.getElementById('sle');sl.innerHTML='';C.socials.forEach((s,i)=>sl.appendChild(mse(s,i)))}
-
-function mle(lk,i){const d=document.createElement('div');d.className='lei';
-const o=Object.keys(IC).map(k=>'<option value="'+k+'" '+(lk.icon===k?'selected':'')+'>'+k+'</option>').join('');
-d.innerHTML='<button class="led" data-i="'+i+'">&#10005;</button><div class="lr"><input type="text" placeholder="Titel" value="'+lk.title+'" data-f="title"><select data-f="icon" style="width:105px">'+o+'</select></div><input type="url" placeholder="https://..." value="'+lk.url+'" data-f="url">';
-d.querySelector('.led').addEventListener('click',()=>{C.links.splice(i,1);pop()});return d}
-
-function mse(sc,i){const d=document.createElement('div');d.className='sei';
-const o=Object.keys(IC).map(p=>'<option value="'+p+'" '+(sc.platform===p?'selected':'')+'>'+p+'</option>').join('');
-d.innerHTML='<select data-f="platform">'+o+'</select><input type="url" placeholder="https://..." value="'+sc.url+'" data-f="url"><button class="sed">&#10005;</button>';
-d.querySelector('.sed').addEventListener('click',()=>{C.socials.splice(i,1);pop()});return d}
-
-document.getElementById('al').addEventListener('click',()=>{C.links.push({title:'New Link',url:'https://',icon:'link'});pop()});
-document.getElementById('as').addEventListener('click',()=>{C.socials.push({platform:'twitter',url:'https://'});pop()});
-
-document.getElementById('sv').addEventListener('click',()=>{
-C.name=document.getElementById('iName').value;C.bio=document.getElementById('iBio').value;
-C.colors.bg=document.getElementById('cBg').value;C.colors.bg2=document.getElementById('cBg2').value;C.colors.accent=document.getElementById('cAc').value;C.colors.text=document.getElementById('cTx').value;C.colors.muted=document.getElementById('cMu').value;
-C.font=document.getElementById('iFont').value;C.fx.grid=document.getElementById('tG').checked;C.fx.glow=document.getElementById('tW').checked;C.fx.particles=document.getElementById('tP').checked;C.fx.typing=document.getElementById('tT').checked;
-
-C.links=[];document.querySelectorAll('.lei').forEach(item=>{C.links.push({title:item.querySelector('[data-f="title"]').value,url:item.querySelector('[data-f="url"]').value,icon:item.querySelector('[data-f="icon"]').value})});
-C.socials=[];document.querySelectorAll('.sei').forEach(item=>{C.socials.push({platform:item.querySelector('[data-f="platform"]').value,url:item.querySelector('[data-f="url"]').value})});
-apply();cs()});
-
-document.getElementById('ej').addEventListener('click',()=>{const b=new Blob([JSON.stringify(C,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='linkhub-config.json';a.click()});
-document.getElementById('ij').addEventListener('click',()=>document.getElementById('imf').click());
-document.getElementById('imf').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{C=JSON.parse(ev.target.result);apply();pop()}catch(err){alert('Ung\u00fcltige JSON')}};r.readAsText(f)});
-document.getElementById('rc').addEventListener('click',()=>{C.cursorData='';apply();const d=document.getElementById('cdz');const p=d.querySelector('.dz-p');if(p)p.remove()});
-document.getElementById('eh').addEventListener('click',()=>{const b=new Blob(['<!DOCTYPE html>\n'+document.documentElement.outerHTML],{type:'text/html'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='my-linkhub.html';a.click()});
-
-document.getElementById('afm')?.addEventListener('change',e=>haf(e.target.files[0]));
-apply();
+document.querySelectorAll('.link-card').forEach(c=>{
+  c.addEventListener('click',e=>{const rect=c.getBoundingClientRect(),r=document.createElement('span');r.className='ripple';const s=Math.max(rect.width,rect.height)*2;
+  r.style.width=r.style.height=s+'px';r.style.left=(e.clientX-rect.left-s/2)+'px';r.style.top=(e.clientY-rect.top-s/2)+'px';c.appendChild(r);setTimeout(()=>r.remove(),600)})
+});
 </script>
 </body>
 </html>
