@@ -1,0 +1,79 @@
+# LinkPage – Dein persönlicher Linktree
+
+Ein vollständiger Linktree/styloo.dev-Klon den du lokal nutzen oder hosten kannst.
+
+## Dateien
+
+```
+linkpage/
+├── editor.html          ← Der visuelle Builder (hier startest du)
+├── profile-example.html ← Beispiel einer exportierten Profilseite
+└── README.md            ← Diese Datei
+```
+
+## Wie starten?
+
+### Lokal in VS Code
+1. `editor.html` in VS Code öffnen
+2. Rechtsklick → "Open with Live Server"  
+   *(oder einfach Doppelklick → im Browser öffnen)*
+
+### Features im Editor
+
+| Feature | Beschreibung |
+|---|---|
+| **Name & Bio** | Dein Profilname und Kurztext |
+| **Profilbild** | Bild hochladen oder URL eingeben |
+| **Hintergrund** | Farbe / Gradient / Bild |
+| **Textfarbe** | Mit Farbwähler oder Hex-Code |
+| **Akzentfarbe** | Farbe deiner Buttons |
+| **Button Style** | Gefüllt, Outline, Glas, Pill, Shadow, Minimal |
+| **Schriftart** | 6 verschiedene Fonts |
+| **Avatar Form** | Rund, Abgerundet, Eckig |
+| **Links** | Beliebig viele Links hinzufügen/entfernen |
+| **Live-Vorschau** | Mobil + Desktop Ansicht |
+| **Export** | Fertige `.html` Datei herunterladen |
+
+## Seite veröffentlichen
+
+### Option 1 – GitHub Pages (kostenlos)
+1. Exportierte `linkpage.html` → umbenennen zu `index.html`
+2. Neues GitHub Repository erstellen
+3. Datei hochladen
+4. Settings → Pages → Branch: main → Speichern
+5. Deine URL: `https://deinname.github.io/repo`
+
+### Option 2 – Netlify (kostenlos, noch einfacher)
+1. [netlify.com](https://netlify.com) → "Add new site" → "Deploy manually"
+2. HTML-Datei rein ziehen → fertig!
+
+### Option 3 – Vercel
+```bash
+npm i -g vercel
+vercel deploy
+```
+
+## Anpassen (Code)
+
+Die exportierte `linkpage.html` hat CSS-Variablen ganz oben:
+
+```css
+:root {
+  --bg-from: #0e1117;   /* Hintergrundfarbe Anfang */
+  --bg-to: #1a0533;     /* Hintergrundfarbe Ende */
+  --text: #ffffff;       /* Textfarbe */
+  --accent: #7c6af7;    /* Button-Farbe */
+  --font: 'Outfit';     /* Schriftart */
+}
+```
+
+Einfach anpassen und speichern!
+
+## Erweiterungsideen
+
+- [ ] Klick-Zähler / Analytics
+- [ ] Mehrere Themes speichern
+- [ ] Social Media Icons (SVG)
+- [ ] Animierter Hintergrund (Partikel etc.)
+- [ ] QR-Code Generator
+- [ ] Musik / Spotify Widget
